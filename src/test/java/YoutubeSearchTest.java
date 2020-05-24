@@ -9,8 +9,6 @@ public class YoutubeSearchTest {
     @Test
     public void searchBuilderTest(){
 
-        YoutubeQueryBuilder queryBuilder = new YoutubeQueryBuilder();
-
         Map<String, String> params = new HashMap<>();
         params.put("part", "status");
         params.put("forUsername", "Youtube");
