@@ -9,14 +9,13 @@ public class YoutubeSearchTest {
     @Test
     public void searchBuilderTest(){
 
-        SearchBuilder sb = new SearchBuilder();
+        YoutubeQueryBuilder queryBuilder = new YoutubeQueryBuilder();
 
-        Map<String, String> param = new HashMap<>();
-        param.put("part", "snippet");
-        param.put("maxResult", "25");
+        Map<String, String> params = new HashMap<>();
+        params.put("part", "status");
+        params.put("forUsername", "Youtube");
 
-        String request = sb.searchBuilder(param);
-        System.out.println(request);
-        Assert.assertNotNull(request);
+        String result = YoutubeQuery.runQuery("channels", params);
+        System.out.println(result);
     }
 }
