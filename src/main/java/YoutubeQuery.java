@@ -1,3 +1,6 @@
+import jdk.nashorn.internal.parser.JSONParser;
+import org.json.*;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -9,24 +12,13 @@ import java.util.Map;
 public class YoutubeQuery {
 
     public static void main(String[] args)  {
-        Map<String, String> params = new HashMap<>();
-        params.put("part", "snippet");
-        params.put("maxResult", "25");
-        String result = YoutubeQuery.runQuery("search", params);
 
-        System.out.println(result);
     }
 
-    public static String runQuery(String queryType, Map<String, String> params) {
+    public static JSONObject runQuery(String queryType, Map<String, String> params) throws IOException {
         String query = YoutubeQueryBuilder.buildQuery(queryType, params);
-        String response = "";
-        try{
-            response = sendRequest(query);
-        }
-        catch (IOException e){
-            e.printStackTrace();
-        }
-        return response;
+
+        return new JSONObject(sendRequest(query));
     }
 
     public static String sendRequest(String query) throws IOException {
