@@ -1,17 +1,5 @@
 
-.idea/misc.xml
-.idea/modules.xml
-YoutubeTestingTool.iml
-.idea/workspace.xml
-out/test/YoutubeTestingTool/YoutubeSearchTest.class
-out/production/YoutubeTestingTool/YoutubeSearchTest.class
-out/production/YoutubeTestingTool/YoutubeSearch.class
-.idea/vcs.xml
-out/production/main/SearchBuilder.class
-out/production/main/YoutubeSearch.class
-out/test/test/YoutubeSearchTest.class
-src/main/main.iml
-src/test/test.iml
 *.class
 *.kotlin_module
-.idea/libraries/json_20200518.xml
+*iml
+*xml

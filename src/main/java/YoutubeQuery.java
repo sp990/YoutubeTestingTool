@@ -11,10 +11,6 @@ import java.util.Map;
 
 public class YoutubeQuery {
 
-    public static void main(String[] args)  {
-
-    }
-
     public static JSONObject runQuery(String queryType, Map<String, String> params) throws IOException {
         String query = YoutubeQueryBuilder.buildQuery(queryType, params);
 
