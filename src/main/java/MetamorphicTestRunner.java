@@ -1,5 +1,3 @@
-public class MetamorphicTestRunner {
-    public static void main(String[] args) {
-
-    }
+public interface MetamorphicTestRunner {
+    public void runTest();
 }
