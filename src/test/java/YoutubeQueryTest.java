@@ -1,7 +1,7 @@
 
 import org.json.JSONObject;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -16,10 +16,10 @@ public class YoutubeQueryTest {
         try {
             String result = YoutubeQuery.sendRequest(
                     "https://www.googleapis.com/youtube/v3/channels?part=snippet&id=UC_x5XG1OV2P6uZZ5FSM9Ttw&key=AIzaSyDgfo8_4ugQhLhJt8dlN_5303hkXgwMKZY");
-            Assert.assertNotNull(result);
+            Assertions.assertNotNull(result);
         }
         catch (IOException e) {
-            Assert.fail("IOException Thrown");
+            Assertions.fail("IOException Thrown");
             e.printStackTrace();
         }
     }
@@ -28,10 +28,10 @@ public class YoutubeQueryTest {
     public void sendRequest_SendInvalidURL_IOExceptionThrown() {
         try {
             YoutubeQuery.sendRequest("");
-            Assert.fail("Should throw an IOException");
+            Assertions.fail("Should throw an IOException");
         }
         catch (IOException e) {
-            Assert.assertTrue(true);
+            Assertions.assertTrue(true);
         }
     }
 
@@ -41,10 +41,10 @@ public class YoutubeQueryTest {
         params.put("part", "snippet");
         try {
             JSONObject result = YoutubeQuery.runQuery("channels", params);
-            Assert.fail("Should throw an IOException");
+            Assertions.fail("Should throw an IOException");
         }
         catch (IOException e) {
-            Assert.assertTrue(e.toString().contains("code: 400"));
+            Assertions.assertTrue(e.toString().contains("code: 400"));
         }
     }
 
@@ -55,7 +55,7 @@ public class YoutubeQueryTest {
         params.put("id", "UC_x5XG1OV2P6uZZ5FSM9Ttw"); //Google Developers Channel id
         try{
             JSONObject result = YoutubeQuery.runQuery("channels", params);
-            Assert.assertNotNull(result);
+            Assertions.assertNotNull(result);
         }
         catch (IOException e ) {
             e.printStackTrace();
@@ -69,7 +69,7 @@ public class YoutubeQueryTest {
         params.put("id", "UC_x5XG1OV2P6uZZ5FSM9Ttw"); //Google Developers Channel id
         try {
             JSONObject result = YoutubeQuery.runQuery("channels", params);
-            Assert.assertTrue(result.getJSONArray("items").getJSONObject(0).has("snippet"));
+            Assertions.assertTrue(result.getJSONArray("items").getJSONObject(0).has("snippet"));
         }
         catch (IOException e) {
             e.printStackTrace();
@@ -98,7 +98,7 @@ public class YoutubeQueryTest {
             JSONObject followUpResult = YoutubeQuery.runQuery("playlists", params);
 
             //Follow up result should have the channelId from the initial search
-            Assert.assertEquals("UC_x5XG1OV2P6uZZ5FSM9Ttw", followUpResult.getJSONArray("items")
+            Assertions.assertEquals("UC_x5XG1OV2P6uZZ5FSM9Ttw", followUpResult.getJSONArray("items")
                     .getJSONObject(0)
                     .getJSONObject("snippet")
                     .get("channelId"));

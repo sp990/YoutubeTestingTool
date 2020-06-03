@@ -1,5 +1,5 @@
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -11,6 +11,6 @@ public class YoutubeQueryBuilderTest {
         Map<String, String> params = new HashMap<>();
         params.put("part", "snippet");
         String query = YoutubeQueryBuilder.buildQuery("channels", params);
-        Assert.assertNotEquals("", query);
+        Assertions.assertNotEquals("", query);
     }
 }
