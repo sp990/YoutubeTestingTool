@@ -1,5 +1,5 @@
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class AppTest {
 
@@ -18,7 +18,7 @@ public class AppTest {
         MetamorphicTestRunner[] actualResult = new App().generateTests();
 
         for(int i = 0; i < actualResult.length; i++)
-            Assert.assertEquals(expectedResult[i].getClass(), actualResult[i].getClass());
+            Assertions.assertEquals(expectedResult[i].getClass(), actualResult[i].getClass());
     }
 
 
