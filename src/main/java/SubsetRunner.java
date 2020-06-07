@@ -1,2 +1,7 @@
-public class SubsetRunner {
+public class SubsetRunner implements MetamorphicTestRunner{
+
+    @Override
+    public void runTest() {
+
+    }
 }
