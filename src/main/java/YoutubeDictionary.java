@@ -1,10 +1,10 @@
 import java.io.*;
-import java.util.Dictionary;
-import java.util.Hashtable;
+import java.util.HashMap;
+import java.util.Map;
 
 public class YoutubeDictionary{
 
-    private Dictionary dictionary = new Hashtable();
+    private Map dictionary = new HashMap<>();
 
     public YoutubeDictionary() throws IOException {
         String file = new File("..\\..\\resources/google-10000-english-no-swears.txt").getAbsolutePath();;
