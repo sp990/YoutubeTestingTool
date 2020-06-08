@@ -30,15 +30,17 @@ public class DisjointRunnerTest {
 
     @Test
     public void setRandomChannelUploadsID_returnsAnUploadID_isNotNull() throws IOException {
-        disjointRunner.setRandomChannelUploadsID("UC_x5XG1OV2P6uZZ5FSM9Ttw");
+        String testChannelId = "UC_x5XG1OV2P6uZZ5FSM9Ttw";//Google Developers
+        disjointRunner.setRandomChannelUploadsID(testChannelId);
         Assertions.assertNotNull(disjointRunner.getRandomChannelUploadsID());
     }
 
     @Test
     public void setRandomChannelUploadsID_returnsTheCorrectUploadID_equalsIDTest() throws IOException {
-        String IDTest = "UU_x5XG1OV2P6uZZ5FSM9Ttw";
-        disjointRunner.setRandomChannelUploadsID("UC_x5XG1OV2P6uZZ5FSM9Ttw"); //GoogleDevelopersID
-        Assertions.assertEquals(IDTest, disjointRunner.getRandomChannelUploadsID());
+        String testChannelID = "UC_x5XG1OV2P6uZZ5FSM9Ttw";//GoogleDevelopersID
+        String uploadIDTest = "UU_x5XG1OV2P6uZZ5FSM9Ttw";//retrieved from API GoogleDevelopers UploadID
+        disjointRunner.setRandomChannelUploadsID(testChannelID);
+        Assertions.assertEquals(uploadIDTest, disjointRunner.getRandomChannelUploadsID());
     }
 
     @Test
@@ -72,14 +74,31 @@ public class DisjointRunnerTest {
         Assertions.assertEquals(emptyList, disjointRunner.getRandomChannelsUploadedPlayListItems());
     }
 
-    //build a quesry for channels using that category and marked for kids - test the results are as expected
+    @Test
+    public void comparePlaylistsVideoIdsForDisjointness_playListsAreDifferent_returnTrue(){
+        ArrayList<String> testList1 = new ArrayList<String>(Arrays.asList("GvgqDSnpRQM","fIc_VEQ7Vo0","V4DDt30Aat4","07718Vcwcyc","XDgC4FMftpg","RQbmXxU2dkg",
+                "7nJdEXpvi1g", "7hakGJU9xco", "x9-F6dbCIHw", "gK7lUK0711E", "18TknKGC7tY", "CyRQJBBVI7g"));
+        ArrayList<String> testList2 = new ArrayList<String>(Arrays.asList("onW8gbbDpdQ","FkiHjuZ2gv8","nq7_ZYJPWf0","QWdYWwW6OAE","eukOuR4vqjg","YL8amQAXD2A",
+                "gx7vUyl-HXs", "0kYIZE8Gl90", "dd8H4fiL9Yc", "PCgLmzkRM38", "j-35y1M9rRU", "Y4C-6anCbmk"));
 
-    //collect the results and store for comparison - test the array gets the results?
+        Assertions.assertTrue(disjointRunner.comparePlaylistsVideoIdsForDisjointness(testList1,testList2));
+    }
 
-    //do another query for channels using the same category but not marked for kids - same test as before?
+    @Test
+    public void comparePlaylistsVideoIdsForDisjointness_playListsAreTheSame_returnFalse(){
+        ArrayList<String> testList1 = new ArrayList<String>(Arrays.asList("GvgqDSnpRQM","fIc_VEQ7Vo0","V4DDt30Aat4","07718Vcwcyc","XDgC4FMftpg","OE63BYWdqC4","RQbmXxU2dkg",
+                "7nJdEXpvi1g", "7hakGJU9xco", "x9-F6dbCIHw", "gK7lUK0711E", "18TknKGC7tY", "CyRQJBBVI7g"));
+        ArrayList<String> testList2 = new ArrayList<String>(Arrays.asList("GvgqDSnpRQM","fIc_VEQ7Vo0","V4DDt30Aat4","07718Vcwcyc","XDgC4FMftpg","OE63BYWdqC4","RQbmXxU2dkg",
+                "7nJdEXpvi1g", "7hakGJU9xco", "x9-F6dbCIHw", "gK7lUK0711E", "18TknKGC7tY", "CyRQJBBVI7g"));
 
-    //collect the results - same test as before?
+        Assertions.assertFalse(disjointRunner.comparePlaylistsVideoIdsForDisjointness(testList1,testList2));
+    }
 
-    //compare the two collections to test for disjointness - test the comparison checking?
 
+
+    @Test
+    public void runTests_setsUpAndRunsPassingTests_returnsTrue() throws IOException {
+        disjointRunner.runTest();
+        Assertions.assertTrue(disjointRunner.result);
+    }
 }

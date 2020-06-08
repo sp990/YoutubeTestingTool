@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 public interface MetamorphicTestRunner {
-    public void runTest();
+    public void runTest() throws IOException;
 }
