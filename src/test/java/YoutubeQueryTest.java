@@ -11,8 +11,6 @@ public class YoutubeQueryTest {
 
     @Test
     public void sendRequest_SendValidURL_ResultNotNull() {
-        Map<String, String> params = new HashMap<>();
-        params.put("part", "snippet");
         try {
             String result = YoutubeQuery.sendRequest(
                     "https://www.googleapis.com/youtube/v3/channels?part=snippet&id=UC_x5XG1OV2P6uZZ5FSM9Ttw&key=AIzaSyDgfo8_4ugQhLhJt8dlN_5303hkXgwMKZY");
@@ -70,38 +68,6 @@ public class YoutubeQueryTest {
         try {
             JSONObject result = YoutubeQuery.runQuery("channels", params);
             Assertions.assertTrue(result.getJSONArray("items").getJSONObject(0).has("snippet"));
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Test
-    public void runQuery_FollowUpQueryRequest_CorrectPlaylistReturned() {
-        Map<String, String> params = new HashMap<>();
-        params.put("part", "contentDetails");
-        params.put("id", "UC_x5XG1OV2P6uZZ5FSM9Ttw"); //Google Developers Channel id
-        try {
-            //Initial Query
-            JSONObject initialResult = YoutubeQuery.runQuery("channels", params);
-
-            //Follow Up Query
-            params.clear();
-            params.put("part", "snippet");
-            params.put("id", initialResult.getJSONArray("items")
-                    .getJSONObject(0)
-                    .getJSONObject("contentDetails")
-                    .getJSONObject("relatedPlaylists")
-                    .get("uploads")
-                    .toString());
-
-            JSONObject followUpResult = YoutubeQuery.runQuery("playlists", params);
-
-            //Follow up result should have the channelId from the initial search
-            Assertions.assertEquals("UC_x5XG1OV2P6uZZ5FSM9Ttw", followUpResult.getJSONArray("items")
-                    .getJSONObject(0)
-                    .getJSONObject("snippet")
-                    .get("channelId"));
         }
         catch (IOException e) {
             e.printStackTrace();
