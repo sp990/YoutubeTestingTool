@@ -9,18 +9,18 @@ import java.util.Random;
 public class EquivalenceRunner implements MetamorphicTestRunner{
 
     String orderValuesList[] = {"date","rating","viewCount","title"};
+    private boolean result;
 
     @Override
     public void runTest() {
         try {
             String order = "relevance";
-            JSONObject result = queryRequest(order);
+            JSONObject source = queryRequest(order);
 
             order = getRandomOrder();
             JSONObject followUp = queryRequest(order);
 
-            Boolean testResult = compareResults(result, followUp);
-            System.out.print(testResult);
+            result = compareResults(source, followUp);
         }
         catch(IOException e){
             e.printStackTrace();
@@ -35,8 +35,8 @@ public class EquivalenceRunner implements MetamorphicTestRunner{
         params.put("channelId", "UCS5tt2z_DFvG7-39J3aE-bQ");
         params.put("type", "playlist");
         params.put("order", order);
-        JSONObject result = YoutubeQuery.runQuery("search", params);
-        return result;
+
+        return YoutubeQuery.runQuery("search", params);
     }
 
     public String getRandomOrder(){
@@ -45,11 +45,14 @@ public class EquivalenceRunner implements MetamorphicTestRunner{
         return orderValuesList[orderVal];
     }
 
-    public boolean compareResults(JSONObject result, JSONObject followUp){
-        List resultArray = result.getJSONArray("items").toList();
+    public boolean compareResults(JSONObject source, JSONObject followUp){
+        List resultArray = source.getJSONArray("items").toList();
         List followUpArray = followUp.getJSONArray("items").toList();
         return (followUpArray.containsAll(resultArray)) && (resultArray.containsAll(followUpArray));
     }
 
+    public boolean getResult(){
+        return result;
+    }
 
 }

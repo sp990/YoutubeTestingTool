@@ -1,6 +1,7 @@
 public class App {
 
     public void run() {
+
     }
 
     public MetamorphicTestRunner[] generateTests() {
