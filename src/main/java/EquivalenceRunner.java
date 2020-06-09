@@ -14,17 +14,22 @@ public class EquivalenceRunner implements MetamorphicTestRunner{
     @Override
     public void runTest() {
         try {
+            System.out.println("---Starting Equivalence Test---");
             String order = "relevance";
+            System.out.println("Sending Source Request...");
             JSONObject source = queryRequest(order);
 
             order = getRandomOrder();
+            System.out.println("Sending Follow Up Request...");
             JSONObject followUp = queryRequest(order);
 
+            System.out.println("Comparing Results...");
             result = compareResults(source, followUp);
         }
         catch(IOException e){
             e.printStackTrace();
         }
+        printReport();
     }
 
     public JSONObject queryRequest(String order) throws IOException {
@@ -49,6 +54,13 @@ public class EquivalenceRunner implements MetamorphicTestRunner{
         List resultArray = source.getJSONArray("items").toList();
         List followUpArray = followUp.getJSONArray("items").toList();
         return (followUpArray.containsAll(resultArray)) && (resultArray.containsAll(followUpArray));
+    }
+
+    public void printReport() {
+        if(result)
+            System.out.println("Equivalence Test: Passed");
+        else
+            System.out.println("Equivalence Test: Failed");
     }
 
     public boolean getResult(){
