@@ -1,5 +1,7 @@
 # YoutubeTestingTool
 
+This is a tool made for a university project.
+
 Libraries:
 - JSON Library **[Github](https://github.com/stleary/JSON-java)** **[.jar](https://repo1.maven.org/maven2/org/json/json/20200518/json-20200518.jar)**
 - JUnit 5 **[Website](https://junit.org/junit5/)** **[docs](https://junit.org/junit5/docs/current/api/)**
