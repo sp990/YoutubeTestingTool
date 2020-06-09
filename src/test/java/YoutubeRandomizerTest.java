@@ -23,8 +23,6 @@ public class YoutubeRandomizerTest {
 
         String randomWord2 = YoutubeRandomizer.getRandomDictionaryWord();
 
-        System.out.println("String1: " + randomWord1 + " String2: " + randomWord2);
-
         Assertions.assertNotEquals(randomWord1, randomWord2);
     }
 }
