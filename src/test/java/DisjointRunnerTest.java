@@ -97,7 +97,7 @@ public class DisjointRunnerTest {
 
 
     @Test
-    public void runTests_setsUpAndRunsPassingTests_returnsTrue() throws IOException {
+    public void runTests_setsUpAndRunsPassingTests_returnsTrue() {
         disjointRunner.runTest();
         Assertions.assertTrue(disjointRunner.getResult());
     }

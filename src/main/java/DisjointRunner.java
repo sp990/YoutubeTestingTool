@@ -99,34 +99,39 @@ public class DisjointRunner implements MetamorphicTestRunner{
 
 
     @Override
-    public void runTest() throws IOException {
+    public void runTest() {
         System.out.println("---Starting Disjoint Test---");
-        //set up the source test to see if we can get a list of video ids based off a channels uploadId
-        System.out.println("Setting the source Test uploads with channel id" + sourceChannelID+ "...");
-        setRandomChannelUploadsID(sourceChannelID);
-        sourceUploadsID = getRandomChannelUploadsID();
-        setRandomChannelUploadedPlayListItems(sourceUploadsID);
-        for(String videoId: getRandomChannelsUploadedPlayListItems()){
-            sourcePlayList.add(videoId);
+        try {
+            //set up the source test to see if we can get a list of video ids based off a channels uploadId
+            System.out.println("Setting the source Test uploads with channel id" + sourceChannelID+ "...");
+            setRandomChannelUploadsID(sourceChannelID);
+            sourceUploadsID = getRandomChannelUploadsID();
+            setRandomChannelUploadedPlayListItems(sourceUploadsID);
+            for(String videoId: getRandomChannelsUploadedPlayListItems()){
+                sourcePlayList.add(videoId);
+            }
+
+            //get a random channel to test the source test with a follow up
+            System.out.println("Setting the follow up test channelId...");
+            while (getRandomChannelID() == sourceChannelID || getRandomChannelID() == null){
+                setRandomChannelID();
+            }
+
+            //get the random channels uploadId by sending the request
+            setRandomChannelUploadsID(getRandomChannelID());
+
+            //use the random channels uploadId to send a request to the playlistItems and collect the videoIds
+            setRandomChannelUploadedPlayListItems(getRandomChannelUploadsID());
+
+            //using disjointness as a test of validity compare the list of the random channels uploaded videoIds with the source tests. The sets should be disjoint
+            // meaning no video uploaded by the source channel should be in the random channels list.
+            result = comparePlaylistsVideoIdsForDisjointness(sourcePlayList, randomChannelUploadedPlayListItems);
+
+            printReport();
+        } catch (IOException e){
+            e.printStackTrace();
         }
 
-        //get a random channel to test the source test with a follow up
-        System.out.println("Setting the follow up test channelId...");
-        while (getRandomChannelID() == sourceChannelID || getRandomChannelID() == null){
-            setRandomChannelID();
-        }
-
-        //get the random channels uploadId by sending the request
-        setRandomChannelUploadsID(getRandomChannelID());
-
-        //use the random channels uploadId to send a request to the playlistItems and collect the videoIds
-        setRandomChannelUploadedPlayListItems(getRandomChannelUploadsID());
-
-        //using disjointness as a test of validity compare the list of the random channels uploaded videoIds with the source tests. The sets should be disjoint
-        // meaning no video uploaded by the source channel should be in the random channels list.
-        result = comparePlaylistsVideoIdsForDisjointness(sourcePlayList, randomChannelUploadedPlayListItems);
-
-        printReport();
     }
 
     public void printReport() {
