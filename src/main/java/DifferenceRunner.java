@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class DifferenceRunner implements MetamorphicTestRunner{
 
-    private Boolean result = false;
+    private boolean result = false;
 
     @Override
     public void runTest() {
@@ -45,7 +45,7 @@ public class DifferenceRunner implements MetamorphicTestRunner{
         printReport();
     }
 
-    public Boolean compareRequestResults(JSONObject source, JSONObject followUp) {
+    public boolean compareRequestResults(JSONObject source, JSONObject followUp) {
         JSONArray sourceItems = source.getJSONArray("items");
         JSONArray followUpItems = followUp.getJSONArray("items");
 
@@ -69,7 +69,7 @@ public class DifferenceRunner implements MetamorphicTestRunner{
         return true;
     }
 
-    public Boolean comparePublishTime(JSONObject source, JSONObject followUp) {
+    public boolean comparePublishTime(JSONObject source, JSONObject followUp) {
         String sourcePublishTime = source.getJSONObject("snippet").get("publishTime").toString();
         String followUpPublishTime = followUp.getJSONObject("snippet").get("publishTime").toString();
         if(!sourcePublishTime.equals(followUpPublishTime))
@@ -78,7 +78,7 @@ public class DifferenceRunner implements MetamorphicTestRunner{
             return false;
     }
 
-    public Boolean compareTitle(JSONObject source, JSONObject followUp) {
+    public boolean compareTitle(JSONObject source, JSONObject followUp) {
         String sourceTitle = source.getJSONObject("snippet").get("title").toString();
         String followUpTitle = followUp.getJSONObject("snippet").get("title").toString();
         if(!sourceTitle.equals(followUpTitle))
@@ -87,7 +87,7 @@ public class DifferenceRunner implements MetamorphicTestRunner{
             return false;
     }
 
-    public Boolean compareChannelTitle(JSONObject source, JSONObject followUp) {
+    public boolean compareChannelTitle(JSONObject source, JSONObject followUp) {
         String sourceChannelTitle = source.getJSONObject("snippet").get("channelTitle").toString();
         String followUpChannelTitle = followUp.getJSONObject("snippet").get("channelTitle").toString();
         if(sourceChannelTitle.equals(followUpChannelTitle))
@@ -96,7 +96,7 @@ public class DifferenceRunner implements MetamorphicTestRunner{
             return false;
     }
 
-    public Boolean compareChannelId(JSONObject source, JSONObject followUp){
+    public boolean compareChannelId(JSONObject source, JSONObject followUp){
         String sourceChannelId = source.getJSONObject("snippet").get("channelId").toString();
         String followUpChannelId = followUp.getJSONObject("snippet").get("channelId").toString();
         if(sourceChannelId.equals(followUpChannelId))
@@ -131,7 +131,7 @@ public class DifferenceRunner implements MetamorphicTestRunner{
             System.out.println("Difference Test: Failed");
     }
 
-    public Boolean getResult() {
+    public boolean getResult() {
         return result;
     }
 }
