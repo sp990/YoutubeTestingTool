@@ -7,7 +7,7 @@ public class YoutubeDictionary{
     private Map dictionary = new HashMap<>();
 
     public YoutubeDictionary() throws IOException {
-        String file = new File("resources/google-10000-english-no-swears.txt").getAbsolutePath();;
+        String file = new File("../../resources/google-10000-english-no-swears.txt").getAbsolutePath();;
         FileReader fr = new FileReader(file);
 
         BufferedReader in = new BufferedReader(fr);
