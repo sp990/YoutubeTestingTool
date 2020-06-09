@@ -99,6 +99,6 @@ public class DisjointRunnerTest {
     @Test
     public void runTests_setsUpAndRunsPassingTests_returnsTrue() throws IOException {
         disjointRunner.runTest();
-        Assertions.assertTrue(disjointRunner.result);
+        Assertions.assertTrue(disjointRunner.getResult());
     }
 }

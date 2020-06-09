@@ -21,18 +21,13 @@ public class DisjointRunner implements MetamorphicTestRunner{
     private String randomChannelID;
     private String randomUploadsID = "";
     private ArrayList<String> randomChannelUploadedPlayListItems = new ArrayList<>();
-    public boolean result;
+    private boolean result;
 
-    public DisjointRunner(){
+    public DisjointRunner(){ }
 
+    public boolean getResult(){
+        return result;
     }
-
-    public static void main(String[] args) throws IOException {
-        System.out.println("---Starting Disjoint Test---");
-        DisjointRunner testRunner = new DisjointRunner();
-        testRunner.runTest();
-    }
-
 
     public void setRandomChannelID(){
         randomChannelID = YoutubeRandomizer.getRandomChannelID();
@@ -105,6 +100,7 @@ public class DisjointRunner implements MetamorphicTestRunner{
 
     @Override
     public void runTest() throws IOException {
+        System.out.println("---Starting Disjoint Test---");
         //set up the source test to see if we can get a list of video ids based off a channels uploadId
         System.out.println("Setting the source Test uploads with channel id" + sourceChannelID+ "...");
         setRandomChannelUploadsID(sourceChannelID);
@@ -130,7 +126,14 @@ public class DisjointRunner implements MetamorphicTestRunner{
         // meaning no video uploaded by the source channel should be in the random channels list.
         result = comparePlaylistsVideoIdsForDisjointness(sourcePlayList, randomChannelUploadedPlayListItems);
 
+        printReport();
     }
 
-
+    public void printReport() {
+        if(getResult()){
+            System.out.println("Disjoint test: Passed");
+        } else {
+            System.out.println(("Disjoint test: Failed"));
+        }
+    }
 }
