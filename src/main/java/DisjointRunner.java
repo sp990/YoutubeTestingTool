@@ -63,7 +63,7 @@ public class DisjointRunner implements MetamorphicTestRunner{
         Map<String,String> params = new HashMap<>();
         params.put("part","contentDetails");
         params.put("playlistId",uploadsID);
-        params.put("maxResults","25");
+        params.put("maxResults","50"); //this is the maximum that YouTube API allows to be returned in one query
 
         JSONObject result = YoutubeQuery.runQuery("playlistItems", params);
         JSONArray items = result.getJSONArray("items");
