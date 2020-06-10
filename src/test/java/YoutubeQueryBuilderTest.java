@@ -11,6 +11,6 @@ public class YoutubeQueryBuilderTest {
         Map<String, String> params = new HashMap<>();
         params.put("part", "snippet");
         String query = YoutubeQueryBuilder.buildQuery("channels", params);
-        Assertions.assertNotEquals("https://www.googleapis.com/youtube/v3/channels?part=snippet&key=AIzaSyDgfo8_4ugQhLhJt8dlN_5303hkXgwMKZY", query);
+        Assertions.assertEquals("https://www.googleapis.com/youtube/v3/channels?part=snippet&key=AIzaSyDgfo8_4ugQhLhJt8dlN_5303hkXgwMKZY", query);
     }
 }
