@@ -7,8 +7,6 @@ public class YoutubeDictionary{
     private Map dictionary = new HashMap<>();
 
     public YoutubeDictionary() throws IOException {
-        //Having problems getting the file path to work. The default is for it to work with the main program
-        //To get it working with the Unit tests, change the directory to ../../resources/google-10000-english-no-swears.txt
         String file = new File("resources/google-10000-english-no-swears.txt").getAbsolutePath();
         FileReader fr = new FileReader(file);
 

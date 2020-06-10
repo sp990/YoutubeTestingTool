@@ -173,7 +173,6 @@ public class SubsetRunner implements MetamorphicTestRunner {
 	// Read source tests from file, returns an ArrayList of Map<String, String> / YT Query
 	public ArrayList<HashMap<String, String>> readSourceTests() {
 		ArrayList<HashMap<String, String>> sourceTests = new ArrayList<>();
-		//If this file path isn't working with unit tests, replace it with ../../resources/subsetSourceTests.json
 		File file = new File("resources/subsetSourceTests.json");
 		try {
 			JSONTokener tokener = new JSONTokener(new FileInputStream(file));
