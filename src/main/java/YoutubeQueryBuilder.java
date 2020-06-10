@@ -11,7 +11,7 @@ public class YoutubeQueryBuilder {
             request += entry.getValue();
             request += "&";
         }
-        request += "key=AIzaSyAVzaG-x9J8rlEulZdgztkrpCrYqtUxmJM"; //AIzaSyDmCnXgX_BZuyh-6qBtVq3p2x9O4u-Bli8  (back up key)
+        request += "key=AIzaSyDgfo8_4ugQhLhJt8dlN_5303hkXgwMKZY"; //AIzaSyDmCnXgX_BZuyh-6qBtVq3p2x9O4u-Bli8  (back up key)
         return request;
     }
 }
