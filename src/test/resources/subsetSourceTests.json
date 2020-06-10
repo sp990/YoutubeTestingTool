@@ -1,0 +1,24 @@
+[
+	{
+		"part": "snippet",
+		"type": "video",
+		"fields": "items.id.videoId",
+		"q": "cat",
+		"maxResults": "5",
+		"location": "-141.465347,141.465347",
+		"locationRadius": "100mi",
+		"publishedAfter": "2015-01-01T00:00:00Z",
+		"publishedBefore": "2020-01-02T00:00:00Z"
+	},
+	{
+		"part": "snippet",
+		"type": "video",
+		"fields": "items.id.videoId",
+		"q": "dog",
+		"maxResults": "5",
+		"location": "-16.922779,145.770294",
+		"locationRadius": "50mi",
+		"publishedAfter": "2015-01-01T00:00:00Z",
+		"publishedBefore": "2020-01-02T00:00:00Z"
+	}
+]
