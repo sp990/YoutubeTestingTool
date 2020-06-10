@@ -1,6 +1,7 @@
 # YoutubeTestingTool
 
 This is a tool made for a university project.
+To run the app open the project in IntelliJ and navigate to the App Class (Main>java>App) then use the run button or ctrl+F10.
 
 Libraries:
 - JSON Library **[Github](https://github.com/stleary/JSON-java)** **[.jar](https://repo1.maven.org/maven2/org/json/json/20200518/json-20200518.jar)**
