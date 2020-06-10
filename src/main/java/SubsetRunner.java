@@ -76,7 +76,7 @@ public class SubsetRunner implements MetamorphicTestRunner {
 
 				// Follow Up Test - Date Range
 				System.out.println("Source Test vs Follow-up Test (date range changed):\t\t");
-				if (compareSubsets(YoutubeQuery.runQuery("search", sourceTests.get(sourceTestCount)).getJSONArray("items"), YoutubeQuery.runQuery("search", createFollowUpTest_Category()).getJSONArray("items"))) {
+				if (compareSubsets(YoutubeQuery.runQuery("search", sourceTests.get(sourceTestCount)).getJSONArray("items"), YoutubeQuery.runQuery("search", createFollowUpTest_DateRange()).getJSONArray("items"))) {
 					testPassed++;
 					System.out.println("passed");
 				} else {
@@ -86,7 +86,7 @@ public class SubsetRunner implements MetamorphicTestRunner {
 
 				// Follow Up Test - Radius
 				System.out.println("Source Test vs Follow-up Test (radius changed):\t\t");
-				if (compareSubsets(YoutubeQuery.runQuery("search", sourceTests.get(sourceTestCount)).getJSONArray("items"), YoutubeQuery.runQuery("search", createFollowUpTest_Category()).getJSONArray("items"))) {
+				if (compareSubsets(YoutubeQuery.runQuery("search", sourceTests.get(sourceTestCount)).getJSONArray("items"), YoutubeQuery.runQuery("search", createFollowUpTest_Radius()).getJSONArray("items"))) {
 					testPassed++;
 					System.out.println("passed");
 				} else {
