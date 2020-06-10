@@ -71,7 +71,7 @@ public class SubsetRunner implements MetamorphicTestRunner {
 					System.out.println("passed");
 				} else {
 					testFailed++;
-					System.out.print("failed \t | \t The follow-up subset is not in the original set");
+					System.out.println("failed \t | \t The follow-up subset is not in the original set");
 				}
 
 				// Follow Up Test - Date Range
