@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class SubsetRunnerTest {
     private final SubsetRunner subsetTest = new SubsetRunner();
