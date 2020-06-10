@@ -19,9 +19,10 @@ public class SubsetRunner implements MetamorphicTestRunner {
 	int testPassed = 0;
 	int testFailed = 0;
 	int sourceTestCount = 0;
+	private boolean result = false;
 	protected final ArrayList<HashMap<String, String>> sourceTests = readSourceTests();
 	
-	public SubsetRunner() throws FileNotFoundException {}
+	public SubsetRunner() {}
 	
 	/* 
 	 * 		###  Subset Metamorphic Relation Testing of the YouTube Data API  ###
@@ -56,52 +57,52 @@ public class SubsetRunner implements MetamorphicTestRunner {
 	 * */
 	
 	@Override
-    public void runTest() throws IOException {
+    public void runTest() {
 		
-		System.out.println("---- Testing Subset Metamorpic Relations ----\n");
+		System.out.println("---Starting Subset Test---\n");
+		try {
+			for (int i = 0; i < sourceTests.size(); i++) {
+				System.out.println("Source Test: " + (sourceTestCount + 1) + "\n");
 
-		for (int i = 0; i < sourceTests.size(); i++) {
-			System.out.println("Source Test: " + (sourceTestCount + 1) + "\n");
-			
-			// Follow Up Test - Category 
-			System.out.println("Source Test vs Follow-up Test (category changed):\t\t");
-			if (compareSubsets(YoutubeQuery.runQuery("search", sourceTests.get(sourceTestCount)).getJSONArray("items"), YoutubeQuery.runQuery("search", createFollowUpTest_Category()).getJSONArray("items"))) {
-				testPassed++; 
-				System.out.println("passed");
+				// Follow Up Test - Category
+				System.out.println("Source Test vs Follow-up Test (category changed):\t\t");
+				if (compareSubsets(YoutubeQuery.runQuery("search", sourceTests.get(sourceTestCount)).getJSONArray("items"), YoutubeQuery.runQuery("search", createFollowUpTest_Category()).getJSONArray("items"))) {
+					testPassed++;
+					System.out.println("passed");
+				} else {
+					testFailed++;
+					System.out.print("failed \t | \t The follow-up subset is not in the original set");
+				}
+
+				// Follow Up Test - Date Range
+				System.out.println("Source Test vs Follow-up Test (date range changed):\t\t");
+				if (compareSubsets(YoutubeQuery.runQuery("search", sourceTests.get(sourceTestCount)).getJSONArray("items"), YoutubeQuery.runQuery("search", createFollowUpTest_Category()).getJSONArray("items"))) {
+					testPassed++;
+					System.out.println("passed");
+				} else {
+					testFailed++;
+					System.out.println("failed \t | \t The follow-up subset is not in the original set");
+				}
+
+				// Follow Up Test - Radius
+				System.out.println("Source Test vs Follow-up Test (radius changed):\t\t");
+				if (compareSubsets(YoutubeQuery.runQuery("search", sourceTests.get(sourceTestCount)).getJSONArray("items"), YoutubeQuery.runQuery("search", createFollowUpTest_Category()).getJSONArray("items"))) {
+					testPassed++;
+					System.out.println("passed");
+				} else {
+					testFailed++;
+					System.out.println("failed \t | \t The follow-up subset is not in the original set");
+				}
+				sourceTestCount++;
 			}
-			else {
-				testFailed++;
-				System.out.print("failed \t | \t The follow-up subset is not in the original set");
-			}
-			
-			// Follow Up Test - Date Range
-			System.out.println("Source Test vs Follow-up Test (date range changed):\t\t");
-			if (compareSubsets(YoutubeQuery.runQuery("search", sourceTests.get(sourceTestCount)).getJSONArray("items"), YoutubeQuery.runQuery("search", createFollowUpTest_Category()).getJSONArray("items"))) {
-				testPassed++; 
-				System.out.println("passed");
-			}
-			else {
-				testFailed++;
-				System.out.println("failed \t | \t The follow-up subset is not in the original set");
-			}
-			
-			// Follow Up Test - Radius
-			System.out.println("Source Test vs Follow-up Test (radius changed):\t\t");
-			if (compareSubsets(YoutubeQuery.runQuery("search", sourceTests.get(sourceTestCount)).getJSONArray("items"), YoutubeQuery.runQuery("search", createFollowUpTest_Category()).getJSONArray("items"))) {
-				testPassed++; 
-				System.out.println("passed");
-			}
-			else {
-				testFailed++;
-				System.out.println("failed \t | \t The follow-up subset is not in the original set");
-			}
-			sourceTestCount++;
 		}
-		
-		System.out.println("\n\n");
-		System.out.println("---- REPORT ----\n");
-		System.out.println("Tests passed:\t" + testPassed);
-		System.out.println("Tests failed:\t" + testFailed);
+		catch (IOException e){
+			e.printStackTrace();
+		}
+
+		//Setting the value of result
+		if(testPassed > testFailed)
+			result = true;
 	}
 
 	
@@ -170,23 +171,33 @@ public class SubsetRunner implements MetamorphicTestRunner {
 	
 	
 	// Read source tests from file, returns an ArrayList of Map<String, String> / YT Query
-	public ArrayList<HashMap<String, String>> readSourceTests() throws FileNotFoundException {
+	public ArrayList<HashMap<String, String>> readSourceTests() {
 		ArrayList<HashMap<String, String>> sourceTests = new ArrayList<>();
-		File file = new File("../../resources/subsetSourceTests.json");		
-		JSONTokener tokener = new JSONTokener(new FileInputStream(file));
-		JSONArray jsonArray = new JSONArray(tokener);
-		
-		for (int i = 0; i < jsonArray.length(); i++) {
-			HashMap<String, String> sourceTest = new HashMap<>();
-			JSONObject jsonObject = jsonArray.getJSONObject(i);
-			Iterator<String> keysIterator = jsonObject.keys();
-			
-			while (keysIterator.hasNext()) {
-				String keyName = (String) keysIterator.next();
-				sourceTest.put(keyName, jsonObject.getString(keyName));
+		//If this file path isn't working with unit tests, replace it with ../../resources/subsetSourceTests.json
+		File file = new File("resources/subsetSourceTests.json");
+		try {
+			JSONTokener tokener = new JSONTokener(new FileInputStream(file));
+			JSONArray jsonArray = new JSONArray(tokener);
+
+			for (int i = 0; i < jsonArray.length(); i++) {
+				HashMap<String, String> sourceTest = new HashMap<>();
+				JSONObject jsonObject = jsonArray.getJSONObject(i);
+				Iterator<String> keysIterator = jsonObject.keys();
+
+				while (keysIterator.hasNext()) {
+					String keyName = (String) keysIterator.next();
+					sourceTest.put(keyName, jsonObject.getString(keyName));
+				}
+				sourceTests.add(sourceTest);
 			}
-			sourceTests.add(sourceTest);
+		}
+		catch (FileNotFoundException e) {
+			e.printStackTrace();
 		}
 		return sourceTests;
+	}
+
+	public boolean getResult() {
+		return result;
 	}
 }

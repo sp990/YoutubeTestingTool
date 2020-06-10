@@ -7,12 +7,13 @@ public class App {
 
         for(MetamorphicTestRunner test : tests){
             test.runTest();
+            System.out.println();
             if(test.getResult())
                 testsPassed++;
             else
                 testsFailed++;
         }
-
+        System.out.println("\n\n---Result Tally---");
         System.out.println("Tests Passed " + testsPassed + " Test Failed: " + testsFailed);
     }
 
