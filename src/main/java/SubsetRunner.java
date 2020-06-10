@@ -61,10 +61,10 @@ public class SubsetRunner implements MetamorphicTestRunner {
 		System.out.println("---- Testing Subset Metamorpic Relations ----\n");
 
 		for (int i = 0; i < sourceTests.size(); i++) {
-			System.out.println("Source Test: " + sourceTestCount++ + "\n");
+			System.out.println("Source Test: " + (sourceTestCount + 1) + "\n");
 			
 			// Follow Up Test - Category 
-			System.out.print("Source Test vs Follow-up Test (category changed):\t\t");
+			System.out.println("Source Test vs Follow-up Test (category changed):\t\t");
 			if (compareSubsets(YoutubeQuery.runQuery("search", sourceTests.get(sourceTestCount)).getJSONArray("items"), YoutubeQuery.runQuery("search", createFollowUpTest_Category()).getJSONArray("items"))) {
 				testPassed++; 
 				System.out.println("passed");
@@ -75,32 +75,31 @@ public class SubsetRunner implements MetamorphicTestRunner {
 			}
 			
 			// Follow Up Test - Date Range
-			System.out.print("Source Test vs Follow-up Test (date range changed):\t\t");
+			System.out.println("Source Test vs Follow-up Test (date range changed):\t\t");
 			if (compareSubsets(YoutubeQuery.runQuery("search", sourceTests.get(sourceTestCount)).getJSONArray("items"), YoutubeQuery.runQuery("search", createFollowUpTest_Category()).getJSONArray("items"))) {
 				testPassed++; 
 				System.out.println("passed");
 			}
 			else {
 				testFailed++;
-				System.out.print("failed \t | \t The follow-up subset is not in the original set");
+				System.out.println("failed \t | \t The follow-up subset is not in the original set");
 			}
 			
 			// Follow Up Test - Radius
-			System.out.print("Source Test vs Follow-up Test (radius changed):\t\t");
+			System.out.println("Source Test vs Follow-up Test (radius changed):\t\t");
 			if (compareSubsets(YoutubeQuery.runQuery("search", sourceTests.get(sourceTestCount)).getJSONArray("items"), YoutubeQuery.runQuery("search", createFollowUpTest_Category()).getJSONArray("items"))) {
 				testPassed++; 
 				System.out.println("passed");
 			}
 			else {
 				testFailed++;
-				System.out.print("failed \t | \t The follow-up subset is not in the original set");
+				System.out.println("failed \t | \t The follow-up subset is not in the original set");
 			}
 			sourceTestCount++;
 		}
 		
 		System.out.println("\n\n");
 		System.out.println("---- REPORT ----\n");
-		System.out.println("Tests conducted:\t" + testPassed+testFailed);
 		System.out.println("Tests passed:\t" + testPassed);
 		System.out.println("Tests failed:\t" + testFailed);
 	}
