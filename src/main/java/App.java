@@ -1,7 +1,20 @@
 public class App {
 
     public void run() {
+        MetamorphicTestRunner[] tests = generateTests();
+        int testsPassed = 0;
+        int testsFailed = 0;
 
+        for(MetamorphicTestRunner test : tests){
+            test.runTest();
+            System.out.println();
+            if(test.getResult())
+                testsPassed++;
+            else
+                testsFailed++;
+        }
+        System.out.println("\n\n---Result Tally---");
+        System.out.println("Tests Passed " + testsPassed + " Test Failed: " + testsFailed);
     }
 
     public MetamorphicTestRunner[] generateTests() {
