@@ -1,6 +1,6 @@
 # YoutubeTestingTool
 
-This is a tool made for a university project.
+This is a tool made for a university project.<br /><br />
 To run the app open the project in IntelliJ and navigate to the App Class (Main>java>App) then use the run button or ctrl+F10.
 
 Libraries:
