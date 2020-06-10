@@ -38,7 +38,6 @@ public class DisjointRunner implements MetamorphicTestRunner{
     }
 
     public void setRandomChannelUploadsID(String randomChannelID) throws IOException {
-        System.out.println("Sending Request to get channels Upload playlistId...");
         randomUploadsID="";
         Map<String,String> params = new HashMap<>();
         params.put("part","contentDetails");
@@ -58,7 +57,6 @@ public class DisjointRunner implements MetamorphicTestRunner{
     }
 
     public void setRandomChannelUploadedPlayListItems(String uploadsID) throws IOException {
-        System.out.println("Sending Request to get playlist items by Id...");
         randomChannelUploadedPlayListItems.clear();
         Map<String,String> params = new HashMap<>();
         params.put("part","contentDetails");
@@ -80,10 +78,7 @@ public class DisjointRunner implements MetamorphicTestRunner{
     }
 
     public boolean comparePlaylistsVideoIdsForDisjointness(ArrayList<String> sourcePlayList, ArrayList<String> followUpPlayList){
-        System.out.println("Comparing the two sets...");
         boolean testResult = false;
-        System.out.println(sourcePlayList);
-        System.out.println(followUpPlayList);
         //iterate the test list
         for (String videoID: followUpPlayList) {
             //check the source list doesn't contain a videoId from the source list (returns true if it does contain a matching element)
@@ -103,7 +98,6 @@ public class DisjointRunner implements MetamorphicTestRunner{
         System.out.println("---Starting Disjoint Test---");
         try {
             //set up the source test to see if we can get a list of video ids based off a channels uploadId
-            System.out.println("Setting the source Test uploads with channel id" + sourceChannelID+ "...");
             setRandomChannelUploadsID(sourceChannelID);
             sourceUploadsID = getRandomChannelUploadsID();
             setRandomChannelUploadedPlayListItems(sourceUploadsID);
@@ -112,17 +106,18 @@ public class DisjointRunner implements MetamorphicTestRunner{
             }
 
             //get a random channel to test the source test with a follow up
-            System.out.println("Setting the follow up test channelId...");
             while (getRandomChannelID() == sourceChannelID || getRandomChannelID() == null){
                 setRandomChannelID();
             }
 
+            System.out.println("Sending Source Request...");
             //get the random channels uploadId by sending the request
             setRandomChannelUploadsID(getRandomChannelID());
-
+            System.out.println("Sending Follow Up Request...");
             //use the random channels uploadId to send a request to the playlistItems and collect the videoIds
             setRandomChannelUploadedPlayListItems(getRandomChannelUploadsID());
 
+            System.out.println("Comparing Results...");
             //using disjointness as a test of validity compare the list of the random channels uploaded videoIds with the source tests. The sets should be disjoint
             // meaning no video uploaded by the source channel should be in the random channels list.
             result = comparePlaylistsVideoIdsForDisjointness(sourcePlayList, randomChannelUploadedPlayListItems);

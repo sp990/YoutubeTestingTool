@@ -49,8 +49,6 @@ public class DifferenceRunner implements MetamorphicTestRunner{
         JSONArray sourceItems = source.getJSONArray("items");
         JSONArray followUpItems = followUp.getJSONArray("items");
 
-        System.out.println(sourceItems.toList().size() + " " + followUpItems.toList().size());
-
         for(int i = 0; i < sourceItems.toList().size(); i++) {
             JSONObject sourceSnippet = sourceItems.getJSONObject(i);
             for(int j = 0; j < followUpItems.toList().size(); j++) {
